@@ -1,0 +1,149 @@
+<html ng-app="myApp">
+    <head>  
+        <meta charset="UTF-8">      
+        <title>..::Livraria Cortez::..</title>
+        <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+        <!-- Chama o BootsTrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <!-- Fim da chamada do BootsTrap -->
+        <!-- Chama hora -->
+        <script language="javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script language="javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
+        <script language="javascript">
+            $(document).ready(function(e) {
+                moment.lang('pt-br');
+                $("#DataAtual3").html(moment().format('LL'));
+            }); 
+        </script>
+        <!-- Fim Hora -->
+        <!-- Style do Modal -->
+        <link rel="stylesheet" type="text/css" href="css/modal.css">
+        <!-- Fim -->
+    </head>
+    <body>
+        <div  style="position:absolute; top:0; right:16%;">
+            <h3><font color="#3379B5">Hoje é:</font></h3> <h4><div id="DataAtual3"></div></h4>
+        </div>
+        <div class="container" ng-controller="AppCtrl">
+            <img height="90px" src="logo.png"></img>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Autor(a)</th>
+                        <th>Gênero</th>
+                        <th>Ações</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input class="form-control" ng-model="livro.nome"></td>
+                        <td><input class="form-control" ng-model="livro.autor"></td>
+                        <td><input class="form-control" ng-model="livro.tema"></td>
+                        <td><button id="myBtn" class="btn btn-primary" ng-click="cadLivro()">Cadastrar Livro</button></td>
+                        <td><button id="myBtnatt" class="btn btn-info" ng-click="atualizarLivro()">Atualizar Registro</button></td>&nbsp;&nbsp;
+                        <td><button class="btn btn-danger" ng-click="limparLivro()">Limpar Consulta</button></td>
+                    </tr>
+                    <tr ng-repeat="livro in listalivro">
+                        <td>{{ livro.nome }}</td>
+                        <td>{{ livro.autor }}</td>
+                        <td>{{ livro.tema }}</td>
+                        <td><button class="btn btn-danger" ng-click="retirar(livro._id)">Remover</button></td>
+                        <td><button class="btn btn-warning" ng-click="editar(livro._id)">Editar</button></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+        <script src="controllers/controller.js"></script>
+
+        <!-- Modal cadastro -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal caixa -->
+            <div class="modal-content">
+                <span class="close">x</span>
+                <p>Cadastrado com sucesso!</p>
+            </div>
+
+        </div>
+
+        <!-- Modal att -->
+        <div id="myModalatt" class="modal">
+
+            <!-- Modal caixa -->
+            <div class="modal-content">
+                <span class="closeatt">x</span>
+                <p>Atualizado com sucesso!</p>
+            </div>
+
+        </div>
+        
+        <!-- Modal Cadastro -->
+        <script language="javascript">
+                // Get the modal
+                var modal = document.getElementById('myModal');
+
+                // Get the button that opens the modal
+                var btn = document.getElementById("myBtn");
+
+                // Get the <span> element that closes the modal
+                var span = document.getElementsByClassName("close")[0];
+
+                // When the user clicks the button, open the modal
+                btn.onclick = function() {
+                    modal.style.display = "block";
+                }
+
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = function() {
+                    modal.style.display = "none";
+                }
+
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+        </script>
+        <!-- Fim modal Cadastro -->
+        <!-- modal Att -->
+        <script language="javascript">
+                // Get the modal
+                var modalatt = document.getElementById('myModalatt');
+
+                // Get the button that opens the modal
+                var btnatt = document.getElementById("myBtnatt");
+
+                // Get the <span> element that closes the modal
+                var spanatt = document.getElementsByClassName("closeatt")[0];
+
+                // When the user clicks the button, open the modal
+                btnatt.onclick = function() {
+                    modalatt.style.display = "block";
+                }
+
+                // When the user clicks on <span> (x), close the modal
+                spanatt.onclick = function() {
+                    modalatt.style.display = "none";
+                }
+
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modalatt.style.display = "none";
+                    }
+                }
+        </script>
+        <!-- Fim modal Att -->
+
+    </body>
+</html>
